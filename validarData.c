@@ -2,12 +2,12 @@
 
 int dataValida(int, int, int);
 int anoBissexto(int);
+int escolha(void);
 
 int main(void) {
     int dia;
     int mes;
     int ano;
-    int op;
     int a = 0;
 
     while (a == 0) {
@@ -30,11 +30,15 @@ int main(void) {
             printf("Data válida");
             printf("\n");
 
+            a = escolha();
+
         }
 
         else {
             printf("Data inválida");
             printf("\n");
+
+            a = escolha();
 
         }
 
@@ -72,6 +76,20 @@ int dataValida(int dia, int mes, int ano) {
     }
 
     a = ((dia > maiorDia) || (dia < 0)) ? 0 : 1;
+
+    return a;
+
+}
+
+int escolha(void) {
+    int op;
+    int a;
+
+    printf("Deseja testar outra data? 1 para sim, 2 para não" );
+    scanf("%d", &op);
+    system ( " clear||cls " );
+
+    a = (op == 1) ? 0 : 1;
 
     return a;
 
