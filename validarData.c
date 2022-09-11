@@ -7,30 +7,40 @@ int main(void) {
     int dia;
     int mes;
     int ano;
-    int a;
+    int op;
+    int a = 0;
 
-    printf("Digite o dia: ");
-    scanf("%d", &dia);
-    getchar();
+    while (a == 0) {
 
-    printf("Digite o mês: ");
-    scanf("%d", &mes);
-    getchar();
+        printf("Digite o dia: ");
+        scanf("%d", &dia);
+        getchar();
 
-    printf("Digite o ano: ");
-    scanf("%d", &ano);
-    getchar();
+        printf("Digite o mês: ");
+        scanf("%d", &mes);
+        getchar();
 
-    a = dataValida(dia, mes, ano);
+        printf("Digite o ano: ");
+        scanf("%d", &ano);
+        getchar();
 
-    if (a == 1) {
-        printf("Data valida");
+        a = dataValida(dia, mes, ano);
+
+        if (a == 1) {
+            printf("Data válida");
+            printf("\n");
+
+        }
+
+        else {
+            printf("Data inválida");
+            printf("\n");
+
+        }
+
     }
 
-    else {
-        printf("Data invalida");
-
-    }
+    printf("Programa encerrado");
 
 }
 
