@@ -5,6 +5,21 @@
 int sortear(void);
 
 int main(void) {
+    char esc;
+
+    printf("Bem-vindo ao gerador de CPF");
+    printf("\nDeseja gerar um CPF? 1 para sim, 0 para nao.");
+
+    scanf("%c" , &esc);
+    getchar();
+
+    while (esc) {
+        int cpf;
+        
+        cpf = gerarCpf();
+
+    }
+
 
     sortear();
 
@@ -19,5 +34,10 @@ int sortear(void) {
     printf("%d\n", num);
 
     return 0;
+
+}
+
+int gerarCpf(void) {
+
 
 }
