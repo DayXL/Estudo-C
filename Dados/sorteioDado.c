@@ -38,61 +38,61 @@ void sortearDado(void) {
 void desenhoDado(int dado) {
     if (dado == 1) {
 
-        printf(".........");
-        printf(".       .");
-        printf(".   *   .");
-        printf(".       .");
-        printf(".........");
+        printf(".........\n");
+        printf(".       .\n");
+        printf(".   *   .\n");
+        printf(".       .\n");
+        printf(".........\n");
 
     }
 
     else if (dado == 2) {
 
-        printf(".........");
-        printf(".*      .");
-        printf(".       .");
-        printf(".      *.");
-        printf(".........");
+        printf(".........\n");
+        printf(".*      .\n");
+        printf(".       .\n");
+        printf(".      *.\n");
+        printf(".........\n");
 
     }
 
     else if (dado == 3) {
 
-        printf(".........");
-        printf(".*      .");
-        printf(".   *   .");
-        printf(".      *.");
-        printf(".........");
+        printf(".........\n");
+        printf(".*      .\n");
+        printf(".   *   .\n");
+        printf(".      *.\n");
+        printf(".........\n");
 
     }
 
     else if (dado == 4) {
 
-        printf(".........");
-        printf(".*     *.");
-        printf(".       .");
-        printf(".*     *.");
-        printf(".........");
+        printf(".........\n");
+        printf(".*     *.\n");
+        printf(".       .\n");
+        printf(".*     *.\n");
+        printf(".........\n");
 
     }
 
     else if (dado == 5) {
 
-        printf(".........");
-        printf(".*     *.");
-        printf(".   *   .");
-        printf(".*     *.");
-        printf(".........");
+        printf(".........\n");
+        printf(".*     *.\n");
+        printf(".   *   .\n");
+        printf(".*     *.\n");
+        printf(".........\n");
 
     }
 
     else {
 
-        printf(".........");
-        printf(".*     *.");
-        printf(".*     *.");
-        printf(".*     *.");
-        printf(".........");
+        printf(".........\n");
+        printf(".*     *.\n");
+        printf(".*     *.\n");
+        printf(".*     *.\n");
+        printf(".........\n");
 
     }
 
