@@ -3,10 +3,13 @@
 #include <stdlib.h>
 
 int sortear(void);
+void gerarCpf(void);
+
 
 int main(void) {
     char esc;
 
+    srand(time(NULL));
     printf("Bem-vindo ao gerador de CPF");
     printf("\nDeseja gerar um CPF? 1 para sim, 0 para nao.");
 
@@ -14,30 +17,39 @@ int main(void) {
     getchar();
 
     while (esc) {
-        int cpf;
-        
-        cpf = gerarCpf();
+        gerarCpf();
+
+        printf("\nDeseja gerar um CPF? 1 para sim, 0 para nao.");
+
+        scanf("%c" , &esc);
+        getchar();
 
     }
-
-
-    sortear();
 
 }
 
 int sortear(void) {
 
     int num;
-    srand(time(NULL));
 
     num = rand()%10;
-    printf("%d\n", num);
 
-    return 0;
+    return num;
 
 }
 
-int gerarCpf(void) {
+void gerarCpf(void) {
+    int cpf[11] = {};
 
+    for (int i = 0; i < 10 ; i++ ) {
+        int num = 0;
+
+        num = sortear();
+
+        cpf[i] = num;
+
+        printf("%d", num);
+
+    }
 
 }
