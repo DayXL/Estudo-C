@@ -2,7 +2,8 @@
 #include <time.h>
 #include <stdlib.h>
 
-void desenhoDado(char dado);
+void desenhoDado(int dado);
+void sortearDado(void);
 
 int main(void) {
     char esc;
@@ -18,11 +19,23 @@ int main(void) {
         scanf("%c" , &esc);
         getchar();
 
+        sortearDado();
+
     }
 
 }
 
-void desenhoDado(char dado) {
+void sortearDado(void) {
+
+    int num;
+
+    num = rand()%10;
+
+    desenhoDado(num);
+
+}
+
+void desenhoDado(int dado) {
     if (dado == 1) {
 
         printf(".........");
