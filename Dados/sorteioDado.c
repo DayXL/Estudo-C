@@ -2,6 +2,8 @@
 #include <time.h>
 #include <stdlib.h>
 
+void desenhoDado(char dado);
+
 int main(void) {
     char esc;
 
@@ -17,5 +19,39 @@ int main(void) {
         getchar();
 
     }
+
+}
+
+void desenhoDado(char dado) {
+    if (dado == 1) {
+
+        printf(".........");
+        printf(".       .");
+        printf(".   *   .");
+        printf(".       .");
+        printf(".........");
+
+    }
+
+    else if (dado == 2) {
+
+        printf(".........");
+        printf(".*      .");
+        printf(".       .");
+        printf(".      *.");
+        printf(".........");
+
+    }
+
+    else if (dado == 3) {
+
+        printf(".........");
+        printf(".*      .");
+        printf(".       .");
+        printf(".      *.");
+        printf(".........");
+
+    }
+
 
 }
