@@ -11,15 +11,12 @@ int main(void) {
 
     srand(time(NULL));
     printf("Bem-vindo ao gerador de CPF");
-    printf("\nDeseja gerar um CPF? 1 para sim, 0 para nao.");
 
-    scanf("%c" , &esc);
-    getchar();
+    esc = 1;
 
     while (esc) {
-        gerarCpf();
-
         printf("\nDeseja gerar um CPF? 1 para sim, 0 para nao.");
+        gerarCpf();
 
         scanf("%c" , &esc);
         getchar();
@@ -48,9 +45,9 @@ void gerarCpf(void) {
 
         cpf[i] = num;
 
-        printf("%d", num);
-
     }
+
+    escolheVerificadoCPF(cpf);
 
 }
 
