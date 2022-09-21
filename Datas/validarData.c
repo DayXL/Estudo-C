@@ -1,10 +1,7 @@
 #include <stdio.h>
+#include "cabecalhoData.h"
 
 // Atividade de validar data
-
-int dataValida(int, int, int);
-int anoBissexto(int);
-int escolha(void);
 
 int main(void) {
     int dia;
