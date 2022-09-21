@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 
 int main(void) {
@@ -14,6 +15,15 @@ int main(void) {
 
         scanf("%c" , &esc);
         getchar();
+
+        char cpf[13];
+        int tam;
+
+        printf("CPF(somente números): ");
+        fgets(cpf, 13, stdin);
+
+        tam = strlen(cpf);
+        cpf[tam - 1] = '\0';
 
     }
 
