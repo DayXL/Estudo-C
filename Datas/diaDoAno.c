@@ -26,12 +26,12 @@ int main(void) {
         a = dataValida(dia, mes, ano);
 
         if (a == 1) {
-            printf("\n");
-
+            int diaDoAno(dia, mes, ano);
 
         }
 
         else {
+            printf("Data inválida");
             printf("\n");
 
         }
@@ -39,6 +39,23 @@ int main(void) {
     }
 
     printf("Programa encerrado");
+
+}
+
+int diaDoAno(int dia , int mes, int ano) {
+    int diaDoAno = 0; 
+
+    if (mes == 1) {
+        diaDoAno = dia;
+
+    }
+    
+    else if (mes == 2) {
+        diaDoAno = dia + 31;
+
+    }
+
+
 
 }
 
