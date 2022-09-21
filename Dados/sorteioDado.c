@@ -47,11 +47,40 @@ void desenhoDado(char dado) {
 
         printf(".........");
         printf(".*      .");
-        printf(".       .");
+        printf(".   *   .");
         printf(".      *.");
         printf(".........");
 
     }
 
+    else if (dado == 4) {
+
+        printf(".........");
+        printf(".*     *.");
+        printf(".       .");
+        printf(".*     *.");
+        printf(".........");
+
+    }
+
+    else if (dado == 5) {
+
+        printf(".........");
+        printf(".*     *.");
+        printf(".   *   .");
+        printf(".*     *.");
+        printf(".........");
+
+    }
+
+    else {
+
+        printf(".........");
+        printf(".*     *.");
+        printf(".*     *.");
+        printf(".*     *.");
+        printf(".........");
+
+    }
 
 }
