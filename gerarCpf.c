@@ -4,7 +4,7 @@
 
 int sortear(void);
 void gerarCpf(void);
-
+void escolheVerificadoCPF(int *cpf);
 
 int main(void) {
     char esc;
@@ -41,7 +41,7 @@ int sortear(void) {
 void gerarCpf(void) {
     int cpf[11] = {};
 
-    for (int i = 0; i < 10 ; i++ ) {
+    for (int i = 0; i < 9 ; i++ ) {
         int num = 0;
 
         num = sortear();
@@ -51,5 +51,36 @@ void gerarCpf(void) {
         printf("%d", num);
 
     }
+
+}
+
+void escolheVerificadoCPF(int *cpf) {
+
+    int soma = 0;
+    int resto = 0;
+
+    for (int i = 0; i < 9; i++) {
+        soma = soma + (cpf[i] * (i + 1));
+
+    }
+
+    resto = soma % 11;
+
+    resto = (resto == 10) ? 0 : resto;
+
+    cpf[9] = resto;
+
+    soma = 0;
+
+    for (int i = 0; i < 10; i++) {
+        soma = soma + (cpf[i] * (i));
+
+    }
+
+    resto = soma % 11;
+
+    resto = (resto == 10) ? 0 : resto;
+
+    cpf[10] = resto;
 
 }
