@@ -43,19 +43,37 @@ int main(void) {
 }
 
 int diaDoAno(int dia , int mes, int ano) {
-    int diaDoAno = 0; 
+    int diaDoAno = 0;
+    int diasDoMes[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-    if (mes == 1) {
-        diaDoAno = dia;
+    for (int i = 0; i < mes; i++) {
 
-    }
+        if (mes == 1) {
+        return dia;
+
+        }
     
-    else if (mes == 2) {
-        diaDoAno = dia + 31;
+        else if (mes == 2) {
+        return dia + 31;
+
+        }
+
+        else {
+            diaDoAno = diaDoAno + diasDoMes[i];
+
+        }
+
 
     }
 
+    diaDoAno = diaDoAno + dia;
 
+    if ((mes == 2) && anoBissexto(ano)) {
+        diaDoAno = diaDoAno + 1;
 
+    }
+
+    return diaDoAno;
+    
 }
 
