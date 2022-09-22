@@ -26,7 +26,7 @@ int main(void) {
         a = dataValida(dia, mes, ano);
 
         if (a == 1) {
-            int diaDoAno(dia, mes, ano);
+            diaDoAno(dia, mes, ano);
 
         }
 
@@ -74,6 +74,6 @@ int diaDoAno(int dia , int mes, int ano) {
     }
 
     return diaDoAno;
-    
+
 }
 
