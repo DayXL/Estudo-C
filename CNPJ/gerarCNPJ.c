@@ -4,6 +4,7 @@
 
 int sortear(void);
 void gerarCnpj(void);
+void escolheVerificadoCNPJ(int *cnpj);
 
 int main(void) {
     char esc;
@@ -18,6 +19,8 @@ int main(void) {
 
         scanf("%c" , &esc);
         getchar();
+
+        gerarCnpj();
 
     }
 
@@ -35,23 +38,57 @@ int sortear(void) {
 
 void gerarCnpj(void) {
     
-    int cnpj[13] = {};
+    int cnpj[14] = {};
 
     for (int i = 0; i < 12 ; i++ ) {
         int num = 0;
 
         num = sortear();
 
-        cpf[i] = num;
+        cnpj[i] = num;
 
     }
 
     escolheVerificadoCNPJ(cnpj);
 
-    for (int i = 0; i < 11 ; i++ ) {
+    for (int i = 0; i < 14 ; i++ ) {
 
         printf("%d" , cnpj[i]);
 
     }
+
+}
+
+void escolheVerificadoCNPJ(int *cnpj) {
+
+    int parteUm[12] = {5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
+    int parteDois[13] = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
+
+    int soma = 0;
+    int resto = 0;
+
+    for (int i = 0; i < 12; i++) {
+        soma = soma + ((cnpj[i]) * (parteUm[i]));
+
+    }
+
+    resto = soma % 11;
+
+    resto = (resto == 0 || resto == 1) ? 0 : 11 - resto;
+
+    cnpj[12] = resto;
+
+    soma = 0;
+
+    for (int i = 0; i < 13; i++) {
+        soma = soma + ((cnpj[i]) * (parteDois[i]));
+
+    }
+
+    resto = soma % 11;
+
+    resto = (resto == 0 || resto == 1) ? 0 : 11 - resto;
+
+    cnpj[13] = resto;
 
 }
