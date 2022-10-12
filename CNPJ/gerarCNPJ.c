@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 int sortear(void);
+void gerarCnpj(void);
 
 int main(void) {
     char esc;
@@ -29,5 +30,20 @@ int sortear(void) {
     num = rand()%10;
 
     return num;
+
+}
+
+void gerarCnpj(void) {
+    
+    int cnpj[13] = {};
+
+    for (int i = 0; i < 12 ; i++ ) {
+        int num = 0;
+
+        num = sortear();
+
+        cpf[i] = num;
+
+    }
 
 }
