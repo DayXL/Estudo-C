@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+//teste
 
 int sortear(void);
 void gerarCnpj(void);
