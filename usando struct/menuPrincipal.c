@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "funcoesAux.h"
+#include "modCliente.h"
 
 
 char verMenuPrincipal(void);
@@ -12,7 +13,7 @@ int main(void) {
     while (esc!='0') {
 
         if (esc=='1') {
-            printf("1. Cadastrar cliente\n");
+            cadastrarCliente();
         }
 
         else if (esc=='2') {
