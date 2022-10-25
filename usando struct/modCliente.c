@@ -4,7 +4,10 @@
 #include "modCliente.h"
 #include "funcoesAux.h"
 
+DadosCliente clt;
+
 void cadastrarCliente(void) {
+
     system ( " clear||cls " );
     printf("\n");
     printf("===============================================================================\n");
@@ -41,6 +44,7 @@ void validarNomeCliente(void) {
 
     } while ((tam == 1) || !(validarPalavra(nomeCliente))); 
 
+    strcpy(clt.nomeDoCliente,nomeCliente);
 }
 
 void validarCPF(void) {
@@ -64,6 +68,9 @@ void validarCPF(void) {
     printf(" ");
     printf("CPF válido!\n");
 
+    strcpy(clt.cpf,cpf);
+
+
 }
 
 void validarNumeroCelular(void) {
@@ -80,6 +87,8 @@ void validarNumeroCelular(void) {
 
     } while ((tam != 12) || !validarNumInteiro(numero));
 
+    strcpy(clt.numero,numero);
+
 } 
 
 void validarEmail(void) {
@@ -95,5 +104,21 @@ void validarEmail(void) {
         email[tam - 1] = '\0';
 
     } while ((tam == 1) || !verificarEmail(email, tam));
+
+    strcpy(clt.email,email);
+
+
+}
+
+void verCliente(void) {
+
+    printf("%s" ,clt.nomeDoCliente);
+    printf("\n");
+    printf("%s" ,clt.cpf);
+    printf("\n");
+    printf("%s" ,clt.numero);
+    printf("\n");
+    printf("%s" ,clt.email);
+    printf("\n");
 
 }
