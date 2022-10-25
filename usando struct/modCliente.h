@@ -1,5 +1,5 @@
 void cadastrarCliente(void);
-void validarNomeCliente(void);
+void validarNomeCliente(char *nome);
 void validarCPF(void);
 void validarNumeroCelular(void);
 void validarEmail(void);
