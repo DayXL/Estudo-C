@@ -8,6 +8,8 @@ DadosCliente clt;
 
 void cadastrarCliente(void) {
 
+    char nomeCliente[100];
+
     system ( " clear||cls " );
     printf("\n");
     printf("===============================================================================\n");
@@ -16,7 +18,7 @@ void cadastrarCliente(void) {
     printf("===============================================================================\n");
     printf("===                                                                         ===\n");
     
-    validarNomeCliente();
+    validarNomeCliente(nomeCliente);
 
     validarCPF();
 
@@ -28,23 +30,24 @@ void cadastrarCliente(void) {
     printf("===============================================================================\n");
     printf("\n");
 
+    strcpy(clt.nomeDoCliente,nomeCliente);
+
+
 }
 
-void validarNomeCliente(void) {
+void validarNomeCliente(char *nome) {
     int tam;
-    char nomeCliente[100];
 
     do {
 
         printf("Nome do cliente: ");
-        fgets(nomeCliente, 100, stdin);
+        fgets(nome, 100, stdin);
 
-        tam = strlen(nomeCliente);
-        nomeCliente[tam - 1] = '\0';
+        tam = strlen(nome);
+        nome[tam - 1] = '\0';
 
-    } while ((tam == 1) || !(validarPalavra(nomeCliente))); 
+    } while ((tam == 1) || !(validarPalavra(nome))); 
 
-    strcpy(clt.nomeDoCliente,nomeCliente);
 }
 
 void validarCPF(void) {
