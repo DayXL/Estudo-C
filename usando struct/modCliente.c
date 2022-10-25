@@ -9,6 +9,9 @@ DadosCliente clt;
 void cadastrarCliente(void) {
 
     char nomeCliente[100];
+    char cpf[30];
+    char numero[30];
+    char email[100];
 
     system ( " clear||cls " );
     printf("\n");
@@ -20,18 +23,20 @@ void cadastrarCliente(void) {
     
     validarNomeCliente(nomeCliente);
 
-    validarCPF();
+    validarCPF(cpf);
 
-    validarNumeroCelular();
+    validarNumeroCelular(numero);
 
-    validarEmail();
+    validarEmail(email);
 
     printf("===                                                                         ===\n");
     printf("===============================================================================\n");
     printf("\n");
 
     strcpy(clt.nomeDoCliente,nomeCliente);
-
+    strcpy(clt.cpf,cpf);
+    strcpy(clt.numero,numero);
+    strcpy(clt.email,email);
 
 }
 
@@ -50,9 +55,8 @@ void validarNomeCliente(char *nome) {
 
 }
 
-void validarCPF(void) {
+void validarCPF(char *cpf) {
     int tam;
-    char cpf[30];
 
     do {
 
@@ -71,14 +75,10 @@ void validarCPF(void) {
     printf(" ");
     printf("CPF válido!\n");
 
-    strcpy(clt.cpf,cpf);
-
-
 }
 
-void validarNumeroCelular(void) {
+void validarNumeroCelular(char *numero) {
     int tam;
-    char numero[30];
 
     do {
 
@@ -90,13 +90,10 @@ void validarNumeroCelular(void) {
 
     } while ((tam != 12) || !validarNumInteiro(numero));
 
-    strcpy(clt.numero,numero);
-
 } 
 
-void validarEmail(void) {
+void validarEmail(char *email) {
     int tam;
-    char email[100];
 
     do {
 
@@ -107,9 +104,6 @@ void validarEmail(void) {
         email[tam - 1] = '\0';
 
     } while ((tam == 1) || !verificarEmail(email, tam));
-
-    strcpy(clt.email,email);
-
 
 }
 
