@@ -1,8 +1,8 @@
 void cadastrarCliente(void);
 void validarNomeCliente(char *nome);
-void validarCPF(void);
-void validarNumeroCelular(void);
-void validarEmail(void);
+void validarCPF(char *cpf);
+void validarNumeroCelular(char *numero);
+void validarEmail(char *email);
 void verCliente(void);
 
 typedef struct cliente DadosCliente;
