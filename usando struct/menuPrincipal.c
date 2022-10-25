@@ -17,7 +17,7 @@ int main(void) {
         }
 
         else if (esc=='2') {
-            printf("2. Ver cliente\n");
+            verCliente();
 
         }
 
