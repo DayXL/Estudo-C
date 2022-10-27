@@ -3,21 +3,23 @@
 #include "funcoesAux.h"
 #include "modCliente.h"
 
+typedef struct cliente DadosCliente;
 
 char verMenuPrincipal(void);
 
 int main(void) {
 
     char esc = verMenuPrincipal();
+    DadosCliente* clt;
 
     while (esc!='0') {
 
         if (esc=='1') {
-            cadastrarCliente();
+            clt = cadastrarCliente();
         }
 
         else if (esc=='2') {
-            verCliente();
+            verCliente(clt);
 
         }
 
