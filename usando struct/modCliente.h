@@ -1,10 +1,3 @@
-void cadastrarCliente(void);
-void validarNomeCliente(char *nome);
-void validarCPF(char *cpf);
-void validarNumeroCelular(char *numero);
-void validarEmail(char *email);
-void verCliente(void);
-
 typedef struct cliente DadosCliente;
 
 struct cliente {
@@ -16,3 +9,9 @@ struct cliente {
 
 };
 
+DadosCliente* cadastrarCliente(void);
+void validarNomeCliente(char *nome);
+void validarCPF(char *cpf);
+void validarNumeroCelular(char *numero);
+void validarEmail(char *email);
+void verCliente(DadosCliente* clt);
