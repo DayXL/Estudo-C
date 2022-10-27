@@ -4,9 +4,12 @@
 #include "modCliente.h"
 #include "funcoesAux.h"
 
-DadosCliente clt;
+typedef struct cliente DadosCliente;
 
-void cadastrarCliente(void) {
+DadosCliente* cadastrarCliente(void) {
+
+    DadosCliente* clt;
+    clt = (DadosCliente*) malloc(sizeof(DadosCliente));
 
     char nomeCliente[100];
     char cpf[30];
@@ -33,10 +36,12 @@ void cadastrarCliente(void) {
     printf("===============================================================================\n");
     printf("\n");
 
-    strcpy(clt.nomeDoCliente,nomeCliente);
-    strcpy(clt.cpf,cpf);
-    strcpy(clt.numero,numero);
-    strcpy(clt.email,email);
+    strcpy(clt->nomeDoCliente,nomeCliente);
+    strcpy(clt->cpf,cpf);
+    strcpy(clt->numero,numero);
+    strcpy(clt->email,email);
+
+    return clt;
 
 }
 
@@ -107,15 +112,15 @@ void validarEmail(char *email) {
 
 }
 
-void verCliente(void) {
+void verCliente(DadosCliente* clt) {
 
-    printf("%s" ,clt.nomeDoCliente);
+    printf("%s" ,clt->nomeDoCliente);
     printf("\n");
-    printf("%s" ,clt.cpf);
+    printf("%s" ,clt->cpf);
     printf("\n");
-    printf("%s" ,clt.numero);
+    printf("%s" ,clt->numero);
     printf("\n");
-    printf("%s" ,clt.email);
+    printf("%s" ,clt->email);
     printf("\n");
 
 }
