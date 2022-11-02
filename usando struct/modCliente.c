@@ -4,7 +4,39 @@
 #include "modCliente.h"
 #include "funcoesAux.h"
 
-typedef struct cliente DadosCliente;
+typedef struct cliente Cliente;
+
+void salArqClt(Cliente* clt) {
+    FILE *fp;
+
+    fp = fopen("arqCliente.dat","ab");
+
+    if (fp == NULL){
+
+      fp = fopen("arqCliente.dat","wb");
+      printf("Arquivo inexistente!\n");
+      printf("Criando novo arquivo!");
+
+      if (fp == NULL) {
+        printf("Erro com arquivo!");
+
+      }
+
+      else {
+        fwrite(clt, sizeof(Cliente), 1, fp);
+
+      }
+
+    }
+
+    else {
+        fwrite(clt, sizeof(Cliente), 1, fp);
+
+    }
+
+    fclose(fp);
+
+}
 
 DadosCliente* cadastrarCliente(void) {
 
