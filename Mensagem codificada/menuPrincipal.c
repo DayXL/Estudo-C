@@ -1,40 +1,135 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+char verMenuPrincipal(void);
+void arqEntrada(char *txt);
+void arqSaid(char *txt);
+void passarEnter(void);
+char auxEscolha(void);
+
 int main(void) {
+    char esc = verMenuPrincipal();
 
-    FILE *fp;
-    char linha1[20];
-    char linha2[20];
-    char linha3[20];
+    while (esc!='0') {
 
-    do {
-        fp = fopen("arquivo.txt","wt");
-
-        if (fp == NULL){
-            printf("Erro na criacao do arquivo\n!");
+        if (esc=='1') {
+            printf("Codificar");
 
         }
 
-    } while (fp == NULL);
+        else if (esc=='2') {
+            printf("Descodificar");
 
-    printf("Digite o texto desejado para gravar ate 20 caracteres: ");
+        }
 
-    fgets(linha1, 20, stdin);
+        else {
+            printf("Opção inválida!");
+        
+        }
 
-    printf("Digite o texto desejado para gravar ate 20 caracteres: ");
+        passarEnter();
 
-    fgets(linha2, 20, stdin);
+        esc = verMenuPrincipal();
+    }
+        
 
-    printf("Digite o texto desejado para gravar ate 20 caracteres: ");
+    printf("Programa finalizado!");
 
-    fgets(linha3, 20, stdin);
-
-    fprintf(fp,linha1, "\n");
-    fprintf(fp,linha2, "\n");
-    fprintf(fp,linha2, "\n");
-
-    fclose(fp);
 
     return 0;
+}
+
+char verMenuPrincipal(void) {
+    system ( " clear||cls " );
+    printf("\n");
+    printf("===============================================================================\n");
+    printf("===                                                                         ===\n");
+    printf("===           = = = = = PROGRAMA TOP SECRET = = = = =                       ===\n");
+    printf("===                                                                         ===\n");
+    printf("===                 1. Codificar mensagem                                   ===\n");
+    printf("===                 2. Descodificar mensagem                                ===\n");
+    printf("===                 0. Sair                                                 ===\n");
+    printf("===                                                                         ===\n");
+    printf("===============================================================================\n");
+    printf("\n");
+
+    char esc;
+    esc = auxEscolha();
+
+    return esc;
+
+}
+
+void arqEntrada(char *txt) {
+
+    FILE *fp;
+
+    fp = fopen("arquEnt.txt","at");
+
+        if (fp == NULL){
+            printf("Criando novo arquivo!");
+            fp = fopen("arquEnt.txt","wt");
+
+            if (fp == NULL) {
+                printf("Erro ao criar arquivo!");
+
+            }
+
+            else {
+                fprintf(fp,txt, "\n");
+
+            }
+        }
+
+        else {
+            fprintf(fp,txt, "\n");
+
+        }
+
+}
+
+void arqSaid(char *txt) {
+
+    FILE *fp;
+
+    fp = fopen("arquSaid.txt","at");
+
+        if (fp == NULL){
+            printf("Criando novo arquivo!");
+            fp = fopen("arquSaid.txt","wt");
+
+            if (fp == NULL) {
+                printf("Erro ao criar arquivo!");
+
+            }
+
+            else {
+                fprintf(fp,txt, "\n");
+
+            }
+        }
+
+        else {
+            fprintf(fp,txt, "\n");
+
+        }
+
+}
+
+void passarEnter(void) {
+
+    printf("Tecle ENTER para continuar");
+    getchar();
+
+}
+
+char auxEscolha(void) {
+
+    printf("Selecione sua opção:");
+    char esc;
+    scanf("%c" , &esc);
+    getchar();
+
+    return esc;
+
 }
