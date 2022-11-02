@@ -9,7 +9,7 @@ int main(void) {
     char linha3[20];
 
     do {
-        fp = fopen("arquivo.txt","r+a");
+        fp = fopen("arquivo.txt","at");
 
         if (fp == NULL){
             printf("Erro na criacao do arquivo\n!");
@@ -32,7 +32,7 @@ int main(void) {
 
     fprintf(fp,linha1, "\n");
     fprintf(fp,linha2, "\n");
-    fprintf(fp,linha2, "\n");
+    fprintf(fp,linha3, "\n");
 
     fclose(fp);
 
