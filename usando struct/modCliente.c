@@ -38,9 +38,49 @@ void salArqClt(Cliente* clt) {
 
 }
 
-Cliente* cadastrarCliente(void) {
+void lerArqClt(void) {
 
-    Cliente* clt;
+    FILE *fp;
+    Cliente *clt;
+    clt = (Cliente*) malloc(sizeof(Cliente));
+
+    fp = fopen("arqCliente.dat","rb");
+
+    if (fp == NULL) {
+
+        fp = fopen("arqCliente.dat","wb");
+        printf("Arquivo inexistente!\n");
+        printf("Criando novo arquivo!");
+
+        if (fp == NULL) {
+            printf("Erro com arquivo!");
+
+        }
+
+    }
+
+    else {
+
+        while (fread(clt, sizeof(Cliente), 1, fp)) {
+
+            if (clt->ativo != 'N') {
+                fread(clt, sizeof(Cliente), 1, fp);
+                
+                exibCliente(clt);
+
+                free(clt);
+
+            }
+        }
+    }
+
+    fclose(fp);
+
+}
+
+void cadastrarCliente(void) {
+
+    Cliente *clt;
     clt = (Cliente*) malloc(sizeof(Cliente));
 
     char nomeCliente[100];
@@ -72,8 +112,11 @@ Cliente* cadastrarCliente(void) {
     strcpy(clt->cpf,cpf);
     strcpy(clt->numero,numero);
     strcpy(clt->email,email);
+    strcpy(clt->email,"S");
 
-    return clt;
+    salArqClt(clt);
+
+    free(clt);
 
 }
 
@@ -144,14 +187,18 @@ void validarEmail(char *email) {
 
 }
 
-void verCliente(Cliente* clt) {
+void exibCliente(Cliente *clt) {
 
+    printf("Nome do Cliente: ");
     printf("%s" ,clt->nomeDoCliente);
     printf("\n");
+    printf("CPF: ");
     printf("%s" ,clt->cpf);
     printf("\n");
+    printf("Número: ");
     printf("%s" ,clt->numero);
     printf("\n");
+    printf("Email: ");
     printf("%s" ,clt->email);
     printf("\n");
 
