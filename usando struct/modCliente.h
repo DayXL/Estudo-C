@@ -1,4 +1,4 @@
-typedef struct cliente DadosCliente;
+typedef struct cliente Cliente;
 
 struct cliente {
 
@@ -9,9 +9,10 @@ struct cliente {
 
 };
 
-DadosCliente* cadastrarCliente(void);
+Cliente* cadastrarCliente(void);
 void validarNomeCliente(char *nome);
 void validarCPF(char *cpf);
 void validarNumeroCelular(char *numero);
 void validarEmail(char *email);
-void verCliente(DadosCliente* clt);
+void verCliente(Cliente* clt);
+void salArqClt(Cliente* clt);
