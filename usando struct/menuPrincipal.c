@@ -10,16 +10,15 @@ char verMenuPrincipal(void);
 int main(void) {
 
     char esc = verMenuPrincipal();
-    Cliente* clt;
 
     while (esc!='0') {
 
         if (esc=='1') {
-            clt = cadastrarCliente();
+            cadastrarCliente();
         }
 
         else if (esc=='2') {
-            verCliente(clt);
+            lerArqClt();
 
         }
 
