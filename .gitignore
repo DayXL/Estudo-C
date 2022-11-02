@@ -54,3 +54,4 @@ dkms.conf
 *.exe
 *.txt
 Teste
+*.dat
