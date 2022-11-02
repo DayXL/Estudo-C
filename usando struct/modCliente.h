@@ -6,7 +6,7 @@ struct cliente {
     char cpf[12];
     char numero[12];
     char email[100];
-    char ativo;
+    int ativo;
 
 };
 
