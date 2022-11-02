@@ -3,14 +3,14 @@
 #include "funcoesAux.h"
 #include "modCliente.h"
 
-typedef struct cliente DadosCliente;
+typedef struct cliente Cliente;
 
 char verMenuPrincipal(void);
 
 int main(void) {
 
     char esc = verMenuPrincipal();
-    DadosCliente* clt;
+    Cliente* clt;
 
     while (esc!='0') {
 
