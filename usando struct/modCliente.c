@@ -112,7 +112,7 @@ void cadastrarCliente(void) {
     strcpy(clt->cpf,cpf);
     strcpy(clt->numero,numero);
     strcpy(clt->email,email);
-    strcpy(clt->email,"S");
+    clt->ativo = 1;
 
     salArqClt(clt);
 
@@ -189,6 +189,7 @@ void validarEmail(char *email) {
 
 void exibCliente(Cliente *clt) {
 
+    printf("\n");
     printf("Nome do Cliente: ");
     printf("%s" ,clt->nomeDoCliente);
     printf("\n");
