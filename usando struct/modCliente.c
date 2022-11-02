@@ -38,10 +38,10 @@ void salArqClt(Cliente* clt) {
 
 }
 
-DadosCliente* cadastrarCliente(void) {
+Cliente* cadastrarCliente(void) {
 
-    DadosCliente* clt;
-    clt = (DadosCliente*) malloc(sizeof(DadosCliente));
+    Cliente* clt;
+    clt = (Cliente*) malloc(sizeof(Cliente));
 
     char nomeCliente[100];
     char cpf[30];
@@ -144,7 +144,7 @@ void validarEmail(char *email) {
 
 }
 
-void verCliente(DadosCliente* clt) {
+void verCliente(Cliente* clt) {
 
     printf("%s" ,clt->nomeDoCliente);
     printf("\n");
