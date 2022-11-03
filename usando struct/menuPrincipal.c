@@ -46,7 +46,10 @@ char verMenuPrincipal(void) {
     printf("===                   = = = = = Cliente = = = = =                           ===\n");
     printf("===                                                                         ===\n");
     printf("===                 1. Cadastrar cliente                                    ===\n");
-    printf("===                 2. Ver cliente                                          ===\n");
+    printf("===                 2. Relatório cliente                                    ===\n");
+    printf("===                 3. Pesquisar cliente                                    ===\n");
+    printf("===                 4. Atualizar cliente                                    ===\n");
+    printf("===                 5. Deletar cliente                                      ===\n");
     printf("===                 0. Finalizar                                            ===\n");
     printf("===                                                                         ===\n");
     printf("===============================================================================\n");
