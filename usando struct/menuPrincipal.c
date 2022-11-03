@@ -22,8 +22,22 @@ int main(void) {
 
         }
 
+        else if (esc=='3') {
+            printf("Pesquisar cliente\n");
+
+        }
+
+        else if (esc=='4') {
+            printf("Atualizar cliente\n");
+
+        }
+
+        else if (esc=='5') {
+            printf("Deletar cliente\n");
+        }
+
         else {
-            printf("Opção inválida!");
+            printf("Opção inválida!\n");
         
         }
 
