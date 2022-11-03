@@ -63,7 +63,7 @@ void lerArqClt(void) {
 
         while (fread(clt, sizeof(Cliente), 1, fp)) {
 
-            if (clt->ativo != 'N') {
+            if (clt->ativo != 0) {
                 fread(clt, sizeof(Cliente), 1, fp);
                 
                 exibCliente(clt);
