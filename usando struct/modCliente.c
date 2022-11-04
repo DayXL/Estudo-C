@@ -47,15 +47,7 @@ void lerArqClt(void) {
     fp = fopen("arqCliente.dat","rb");
 
     if (fp == NULL) {
-
-        fp = fopen("arqCliente.dat","wb");
-        printf("Arquivo inexistente!\n");
-        printf("Criando novo arquivo!");
-
-        if (fp == NULL) {
-            printf("Erro com arquivo!");
-
-        }
+        printf("Erro com arquivo!");
 
     }
 
