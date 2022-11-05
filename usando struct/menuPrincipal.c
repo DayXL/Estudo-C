@@ -23,7 +23,7 @@ int main(void) {
         }
 
         else if (esc=='3') {
-            printf("Pesquisar cliente\n");
+            pesqClt();
 
         }
 
