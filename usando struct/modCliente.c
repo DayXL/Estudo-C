@@ -88,14 +88,22 @@ Cliente* acharClt(char *cpf) {
         while(!feof(fp)) {
             fread(clt, sizeof(Cliente), 1, fp);
 
-            if (strcmp(clt->cpf, cpf) == 0 && (clt->ativo != 0)) {
+            if (strcmp(clt->cpf, cpf) == 0) {
 
-            fclose(fp);
-            return clt;
+                if (clt->ativo != 0) {
+                    fclose(fp);
+                    return clt;
+                }
+
+                else {
+                    fclose(fp);
+                    return NULL;
+                }
 
             } 
+
         }
-    
+
     }
 
     fclose(fp);
