@@ -18,3 +18,5 @@ void validarEmail(char *email);
 void exibCliente(Cliente *clt);
 void salArqClt(Cliente* clt);
 void lerArqClt(void);
+Cliente* acharClt(char *cpf);
+void pesqClt(void);
