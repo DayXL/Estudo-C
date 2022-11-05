@@ -119,6 +119,7 @@ void cadastrarCliente(void) {
     char cpf[30];
     char numero[30];
     char email[100];
+    int jaCad;
 
     system ( " clear||cls " );
     printf("\n");
@@ -128,25 +129,36 @@ void cadastrarCliente(void) {
     printf("===============================================================================\n");
     printf("===                                                                         ===\n");
     
-    validarNomeCliente(nomeCliente);
+    jaCad = validarCPF(cpf);
+    
+    if (jaCad == 1) {
+        printf("\nCliente já cadastrado! ");
 
-    validarCPF(cpf);
+    }
 
-    validarNumeroCelular(numero);
+    else {
+        validarNomeCliente(nomeCliente);
 
-    validarEmail(email);
+        validarCPF(cpf);
 
-    printf("===                                                                         ===\n");
+        validarNumeroCelular(numero);
+
+        validarEmail(email);
+
+        strcpy(clt->nomeDoCliente,nomeCliente);
+        strcpy(clt->cpf,cpf);
+        strcpy(clt->numero,numero);
+        strcpy(clt->email,email);
+        clt->ativo = 1;
+
+        salArqClt(clt);
+
+        printf("\nCliente cadastrado com sucesso! \n");
+
+    }
+    
     printf("===============================================================================\n");
     printf("\n");
-
-    strcpy(clt->nomeDoCliente,nomeCliente);
-    strcpy(clt->cpf,cpf);
-    strcpy(clt->numero,numero);
-    strcpy(clt->email,email);
-    clt->ativo = 1;
-
-    salArqClt(clt);
 
     free(clt);
 
@@ -167,8 +179,9 @@ void validarNomeCliente(char *nome) {
 
 }
 
-void validarCPF(char *cpf) {
+int validarCPF(char *cpf) {
     int tam;
+    Cliente* clt;
 
     do {
 
@@ -179,6 +192,13 @@ void validarCPF(char *cpf) {
 
             tam = strlen(cpf);
             cpf[tam - 1] = '\0';
+            
+            clt = acharClt(cpf);
+
+            if (clt != NULL) {
+                return 1;
+
+            }
 
         } while ((tam != 12) || !validarNumInteiro(cpf));
 
@@ -186,6 +206,8 @@ void validarCPF(char *cpf) {
 
     printf(" ");
     printf("CPF válido!\n");
+
+    return 0;
 
 }
 
