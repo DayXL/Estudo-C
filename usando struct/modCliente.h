@@ -12,7 +12,7 @@ struct cliente {
 
 void cadastrarCliente(void);
 void validarNomeCliente(char *nome);
-void validarCPF(char *cpf);
+int validarCPF(char *cpf);
 void validarNumeroCelular(char *numero);
 void validarEmail(char *email);
 void exibCliente(Cliente *clt);
