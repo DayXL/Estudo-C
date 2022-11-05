@@ -70,6 +70,38 @@ void lerArqClt(void) {
 
 }
 
+Cliente* acharClt(char *cpf) {
+    FILE* fp;
+    Cliente* clt;
+
+    clt = (Cliente*) malloc(sizeof(Cliente));
+    fp = fopen("arqCliente.dat", "rb");
+
+    if (fp == NULL) {
+        printf("Ocorreu um erro na abertura do arquivo!\n");
+
+    }
+
+
+    else {
+
+        while(!feof(fp)) {
+            fread(clt, sizeof(Cliente), 1, fp);
+
+            if (strcmp(clt->cpf, cpf) == 0 && (clt->ativo != 0)) {
+
+            fclose(fp);
+            return clt;
+
+            } 
+        }
+    
+    }
+
+    fclose(fp);
+    return NULL;
+}
+
 void cadastrarCliente(void) {
 
     Cliente *clt;
@@ -195,4 +227,31 @@ void exibCliente(Cliente *clt) {
     printf("%s" ,clt->email);
     printf("\n");
 
+}
+
+void pesqClt(void) {
+    Cliente* clt;
+    char cpf[30];
+    int tam;
+
+    printf("\n = Pesquisar Cliente = \n"); 
+    printf("CPF(somente números): ");
+    fgets(cpf, 30, stdin);
+
+    tam = strlen(cpf);
+    cpf[tam - 1] = '\0';
+
+    clt = acharClt(cpf);
+     
+    if (clt == NULL) {
+        printf("Cliente não cadastrado! ");
+
+    }
+
+    else {
+        exibCliente(clt);
+
+    }
+
+    free(clt);
 }
