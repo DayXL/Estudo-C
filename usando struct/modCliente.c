@@ -82,7 +82,6 @@ Cliente* acharClt(char *cpf) {
 
     }
 
-
     else {
 
         while(!feof(fp)) {
@@ -90,7 +89,7 @@ Cliente* acharClt(char *cpf) {
 
             if (strcmp(clt->cpf, cpf) == 0) {
 
-                if (clt->ativo != 0) {
+                if (clt->ativo == 1) {
                     fclose(fp);
                     return clt;
                 }
@@ -138,8 +137,6 @@ void cadastrarCliente(void) {
 
     else {
         validarNomeCliente(nomeCliente);
-
-        validarCPF(cpf);
 
         validarNumeroCelular(numero);
 
@@ -284,4 +281,80 @@ void pesqClt(void) {
     }
 
     free(clt);
+}
+
+void apgClt(void) {
+
+    FILE* fp;
+    Cliente* clt;
+    char cpf[30];
+    int tam;
+    char aux[20];
+
+    printf("\n = Apagar Cliente = \n"); 
+    printf("CPF(somente números): ");
+    fgets(cpf, 30, stdin);
+
+    tam = strlen(cpf);
+    cpf[tam - 1] = '\0';
+
+    clt = acharClt(cpf);
+     
+    if (clt == NULL) {
+        printf("Cliente não cadastrado! ");
+
+    }
+
+    else {
+
+        clt = (Cliente*) malloc(sizeof(Cliente));
+        fp = fopen("arqCliente.dat", "r+b");
+
+        if (fp == NULL) {
+            printf("Não foi possível deletar!\n");
+            
+        }
+
+        else {
+
+            while(!feof(fp)) {
+
+                fread(clt, sizeof(Cliente), 1, fp);
+
+                if ((strcmp(clt->cpf, cpf) == 0)&& (clt->ativo != 0)) {
+                    
+                    exibCliente(clt);
+
+                    printf("\nDeseja realmente deletar?1 para sim, 0 para não.\n");
+                    fgets(aux, 20, stdin);
+                    
+                    tam = strlen(aux);
+                    aux[tam - 1] = '\0';
+
+                    if (strcmp(aux, "1\0") == 0) {
+                        clt->ativo = 0;
+
+                        fseek(fp, -1*sizeof(Cliente), SEEK_CUR);
+                        fwrite(clt, sizeof(Cliente), 1, fp);
+
+                        printf("\nCliente excluído com sucesso!\n");
+                        fclose(fp);
+                    }
+
+                    else {
+                        printf("\nCancelado!\n");
+                        fclose(fp);
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+    free(clt);
+
 }
