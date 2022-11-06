@@ -20,3 +20,4 @@ void salArqClt(Cliente* clt);
 void lerArqClt(void);
 Cliente* acharClt(char *cpf);
 void pesqClt(void);
+void apgClt(void);
