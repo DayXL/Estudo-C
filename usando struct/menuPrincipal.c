@@ -33,7 +33,7 @@ int main(void) {
         }
 
         else if (esc=='5') {
-            printf("Deletar cliente\n");
+            apgClt();
         }
 
         else {
