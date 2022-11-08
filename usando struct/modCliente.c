@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "modCliente.h"
 #include "funcoesAux.h"
 
@@ -13,19 +14,19 @@ void salArqClt(Cliente* clt) {
 
     if (fp == NULL){
 
-      fp = fopen("arqCliente.dat","wb");
-      printf("Arquivo inexistente!\n");
-      printf("Criando novo arquivo!");
+        //fp = fopen("arqCliente.dat","wb");
+        printf("Arquivo inexistente!\n");
+        printf("Criando novo arquivo!");
 
-      if (fp == NULL) {
-        printf("Erro com arquivo!");
+        if (fp == NULL) {
+            printf("Erro com arquivo!");
 
-      }
+        }
 
-      else {
-        fwrite(clt, sizeof(Cliente), 1, fp);
+        else {
+            fwrite(clt, sizeof(Cliente), 1, fp);
 
-      }
+        }
 
     }
 
@@ -42,27 +43,29 @@ void lerArqClt(void) {
 
     FILE *fp;
     Cliente *clt;
-    clt = (Cliente*) malloc(sizeof(Cliente));
 
-    fp = fopen("arqCliente.dat","rb");
+    if (access("arqCliente.dat", F_OK) != -1) {
 
-    if (fp == NULL) {
-        printf("Erro com arquivo!");
+        fp = fopen("arqCliente.dat","rb");
 
-    }
+        if (fp == NULL) {
+            printf("Erro com arquivo!");
 
-    else {
+        }
 
-        while (fread(clt, sizeof(Cliente), 1, fp)) {
+        else {
+            clt = (Cliente*) malloc(sizeof(Cliente));
 
-            if (clt->ativo != 0) {
-                fread(clt, sizeof(Cliente), 1, fp);
-                
-                exibCliente(clt);
+            while (fread(clt, sizeof(Cliente), 1, fp)) {
 
-                free(clt);
+                if (clt->ativo != 0) {
+                    
+                    exibCliente(clt);
 
+                }
             }
+
+            free(clt);
         }
     }
 
@@ -75,36 +78,39 @@ Cliente* acharClt(char *cpf) {
     Cliente* clt;
 
     clt = (Cliente*) malloc(sizeof(Cliente));
-    fp = fopen("arqCliente.dat", "rb");
 
-    if (fp == NULL) {
-        printf("Ocorreu um erro na abertura do arquivo!\n");
+    if (access("arqCliente.dat", F_OK) != -1) {
 
-    }
+        fp = fopen("arqCliente.dat", "rb");
 
-    else {
-
-        while(!feof(fp)) {
-            fread(clt, sizeof(Cliente), 1, fp);
-
-            if (strcmp(clt->cpf, cpf) == 0) {
-
-                if (clt->ativo == 1) {
-                    fclose(fp);
-                    return clt;
-                }
-
-                else {
-                    fclose(fp);
-                    return NULL;
-                }
-
-            } 
+        if (fp == NULL) {
+            printf("Ocorreu um erro na abertura do arquivo!\n");
 
         }
 
-    }
+        else {
 
+            while(!feof(fp)) {
+                fread(clt, sizeof(Cliente), 1, fp);
+
+                if (strcmp(clt->cpf, cpf) == 0) {
+
+                    if (clt->ativo == 1) {
+                        fclose(fp);
+                        return clt;
+                    }
+
+                    else {
+                        fclose(fp);
+                        return NULL;
+                    }
+
+                } 
+
+            }
+
+        }
+    }
     fclose(fp);
     return NULL;
 }
@@ -193,9 +199,11 @@ int validarCPF(char *cpf) {
             clt = acharClt(cpf);
 
             if (clt != NULL) {
+
                 return 1;
 
             }
+
 
         } while ((tam != 12) || !validarNumInteiro(cpf));
 
@@ -280,16 +288,16 @@ void pesqClt(void) {
 
     }
 
-    free(clt);
 }
 
 void apgClt(void) {
 
     FILE* fp;
     Cliente* clt;
+    Cliente* aux;
     char cpf[30];
     int tam;
-    char aux[20];
+    char aux2[20];
 
     printf("\n = Apagar Cliente = \n"); 
     printf("CPF(somente números): ");
@@ -301,13 +309,15 @@ void apgClt(void) {
     clt = acharClt(cpf);
      
     if (clt == NULL) {
+
+        free(clt);
         printf("Cliente não cadastrado! ");
 
     }
 
     else {
 
-        clt = (Cliente*) malloc(sizeof(Cliente));
+        aux = (Cliente*) malloc(sizeof(Cliente));
         fp = fopen("arqCliente.dat", "r+b");
 
         if (fp == NULL) {
@@ -319,23 +329,23 @@ void apgClt(void) {
 
             while(!feof(fp)) {
 
-                fread(clt, sizeof(Cliente), 1, fp);
+                fread(aux, sizeof(Cliente), 1, fp);
 
-                if ((strcmp(clt->cpf, cpf) == 0)&& (clt->ativo != 0)) {
+                if ((strcmp(aux->cpf, cpf) == 0) && (aux->ativo != 0)) {
                     
-                    exibCliente(clt);
+                    exibCliente(aux);
 
                     printf("\nDeseja realmente deletar?1 para sim, 0 para não.\n");
-                    fgets(aux, 20, stdin);
+                    fgets(aux2, 20, stdin);
                     
-                    tam = strlen(aux);
-                    aux[tam - 1] = '\0';
+                    tam = strlen(aux2);
+                    aux2[tam - 1] = '\0';
 
-                    if (strcmp(aux, "1\0") == 0) {
-                        clt->ativo = 0;
+                    if (strcmp(aux2, "1\0") == 0) {
+                        aux->ativo = 0;
 
                         fseek(fp, -1*sizeof(Cliente), SEEK_CUR);
-                        fwrite(clt, sizeof(Cliente), 1, fp);
+                        fwrite(aux, sizeof(Cliente), 1, fp);
 
                         printf("\nCliente excluído com sucesso!\n");
                         fclose(fp);
@@ -353,8 +363,7 @@ void apgClt(void) {
 
         }
 
+        free(aux);
     }
-
-    free(clt);
 
 }
