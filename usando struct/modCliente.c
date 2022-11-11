@@ -317,7 +317,7 @@ void apgClt(void) {
 
             if (fp == NULL) {
                 printf("Não foi possível deletar!\n");
-                
+
             }
 
             else {
@@ -381,6 +381,7 @@ void atlClt(void) {
     char nomeCliente[100];
     char numero[30];
     char email[100];
+    char esc;
 
     printf("\n = Atualizar Cliente = \n"); 
     printf("CPF(somente números): ");
@@ -425,16 +426,48 @@ void atlClt(void) {
 
                         if (strcmp(aux2, "1\0") == 0) {
 
-                            validarNomeCliente(nomeCliente);
+                            esc = telAtl();
 
-                            validarNumeroCelular(numero);
+                            while (esc!='0') {
 
-                            validarEmail(email);
+                                if (esc=='1') {
+                                    validarNomeCliente(nomeCliente);
+                                    strcpy(aux->nomeDoCliente,nomeCliente);
 
-                            strcpy(aux->nomeDoCliente,nomeCliente);
-                            strcpy(aux->numero,numero);
-                            strcpy(aux->email,email);   
+                                }
 
+                                else if (esc=='2') {
+                                    validarNumeroCelular(numero);
+                                    strcpy(aux->numero,numero);
+
+                                }
+
+                                else if (esc=='3') {
+                                    validarEmail(email);
+                                    strcpy(aux->email,email); 
+
+                                }
+
+                                else if (esc=='4') {
+                                    validarNomeCliente(nomeCliente);
+
+                                    validarNumeroCelular(numero);
+
+                                    validarEmail(email);
+
+                                    strcpy(aux->nomeDoCliente,nomeCliente);
+                                    strcpy(aux->numero,numero);
+                                    strcpy(aux->email,email); 
+                                }
+
+                                else {
+                                    printf("Opção inválida!\n");
+                                
+                                }
+
+                                esc = telAtl();
+                            }
+  
                             fseek(fp, -1*sizeof(Cliente), SEEK_CUR);
                             fwrite(aux, sizeof(Cliente), 1, fp);
 
@@ -462,4 +495,27 @@ void atlClt(void) {
 
     fclose(fp);
     free(clt);
+}
+
+char telAtl(void) {
+    system ( " clear||cls " );
+    printf("\n");
+    printf("===============================================================================\n");
+    printf("===                                                                         ===\n");
+    printf("===                 = = = = = Atualizar = = = = =                           ===\n");
+    printf("===                                                                         ===\n");
+    printf("===                 1. Nome                                                 ===\n");
+    printf("===                 2. Telefone                                             ===\n");
+    printf("===                 3. Email                                                ===\n");
+    printf("===                 4. Atualizar tudo                                       ===\n");
+    printf("===                 0. Sair                                                 ===\n");
+    printf("===                                                                         ===\n");
+    printf("===============================================================================\n");
+    printf("\n");
+
+    char esc;
+    esc = auxEscolha();
+
+    return esc;
+
 }
