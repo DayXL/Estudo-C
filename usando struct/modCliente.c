@@ -74,15 +74,13 @@ void lerArqClt(void) {
 }
 
 Cliente* acharClt(char *cpf) {
-    printf("\n Entrei na acharClt \n");
     FILE* fp;
     Cliente* clt;
 
     clt = (Cliente*) malloc(sizeof(Cliente));
 
     if (access("arqCliente.dat", F_OK) != -1) {
-        printf("\n passei pelo if do access \n");
-
+        
         fp = fopen("arqCliente.dat", "rb");
 
         if (fp == NULL) {
@@ -185,8 +183,6 @@ void validarNomeCliente(char *nome) {
 }
 
 int validarCPF(char *cpf) {
-
-    printf("\n Entrei na validarCPF\n");
     Cliente* clt;
 
     do {
@@ -295,6 +291,7 @@ void apgClt(void) {
     char cpf[30];
     int tam;
     char aux2[20];
+    int achou = 0;
 
     printf("\n = Apagar Cliente = \n"); 
     printf("CPF(somente números): ");
@@ -307,7 +304,6 @@ void apgClt(void) {
      
     if (clt == NULL) {
 
-        free(clt);
         printf("Cliente não cadastrado! ");
 
     }
@@ -326,10 +322,11 @@ void apgClt(void) {
 
             else {
 
-                while(fread(aux, sizeof(Cliente), 1, fp)) {
+                while(fread(aux, sizeof(Cliente), 1, fp) && (achou == 0)) {
 
                     if ((strcmp(aux->cpf, cpf) == 0) && (aux->ativo != 0)) {
-                        
+
+                        achou = 1;
                         exibCliente(aux);
 
                         printf("\nDeseja realmente deletar?1 para sim, 0 para não.\n");
@@ -357,13 +354,98 @@ void apgClt(void) {
                 }
 
             }
-            free(aux);
+        }
+
+
+        else {
+            printf("\nErro com arquivo\n");
+
+        }
+
+        free(aux);
+    }
+
+    fclose(fp);
+    free(clt);
+}
+
+void atlClt(void) {
+
+    FILE* fp;
+    Cliente* clt;
+    Cliente* aux;
+    char cpf[30];
+    int tam;
+    char aux2[20];
+    int achou = 0;
+
+    printf("\n = Apagar Cliente = \n"); 
+    printf("CPF(somente números): ");
+    fgets(cpf, 30, stdin);
+
+    tam = strlen(cpf);
+    cpf[tam - 1] = '\0';
+
+    clt = acharClt(cpf);
+     
+    if (clt == NULL) {
+
+        printf("Cliente não cadastrado! ");
+
+    }
+
+    else {
+
+        aux = (Cliente*) malloc(sizeof(Cliente));
+        fp = fopen("arqCliente.dat", "r+b");
+
+        if (access("arqCliente.dat", F_OK) != -1) {
+
+            if (fp == NULL) {
+                printf("Não foi possível deletar!\n");
+                
+            }
+
+            else {
+
+                while(fread(aux, sizeof(Cliente), 1, fp) && (achou == 0)) {
+
+                    if ((strcmp(aux->cpf, cpf) == 0) && (aux->ativo != 0)) {
+                        achou = 1;
+                        exibCliente(aux);
+
+                        printf("\nDeseja realmente deletar?1 para sim, 0 para não.\n");
+                        fgets(aux2, 20, stdin);
+                        
+                        tam = strlen(aux2);
+                        aux2[tam - 1] = '\0';
+
+                        if (strcmp(aux2, "1\0") == 0) {
+                            aux->ativo = 0;
+
+                            fseek(fp, -1*sizeof(Cliente), SEEK_CUR);
+                            fwrite(aux, sizeof(Cliente), 1, fp);
+
+                            printf("\nCliente excluído com sucesso!\n");
+                        }
+
+                        else {
+                            printf("\nCancelado!\n");
+
+                        }
+
+                    }
+
+                }
+
+            }
         }
 
         else {
             printf("\nErro com arquivo\n");
 
         }
+        free(aux);
     }
 
     fclose(fp);
