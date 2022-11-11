@@ -74,12 +74,14 @@ void lerArqClt(void) {
 }
 
 Cliente* acharClt(char *cpf) {
+    printf("\n Entrei na acharClt \n");
     FILE* fp;
     Cliente* clt;
 
     clt = (Cliente*) malloc(sizeof(Cliente));
 
     if (access("arqCliente.dat", F_OK) != -1) {
+        printf("\n passei pelo if do access \n");
 
         fp = fopen("arqCliente.dat", "rb");
 
@@ -90,20 +92,12 @@ Cliente* acharClt(char *cpf) {
 
         else {
 
-            while(!feof(fp)) {
-                fread(clt, sizeof(Cliente), 1, fp);
+            while(fread(clt, sizeof(Cliente), 1, fp)) {
 
-                if (strcmp(clt->cpf, cpf) == 0) {
+                if ((strcmp(clt->cpf, cpf) == 0) && (clt->ativo == 1)) {
 
-                    if (clt->ativo == 1) {
-                        fclose(fp);
-                        return clt;
-                    }
-
-                    else {
-                        fclose(fp);
-                        return NULL;
-                    }
+                    fclose(fp);
+                    return clt;
 
                 } 
 
@@ -111,11 +105,19 @@ Cliente* acharClt(char *cpf) {
 
         }
     }
+
+    else {
+        fp = fopen("arqCliente.dat", "wb");
+
+    }
+
     fclose(fp);
     return NULL;
 }
 
 void cadastrarCliente(void) {
+
+    printf("\n Entrei na Cadastrar Cliente \n");
 
     Cliente *clt;
     clt = (Cliente*) malloc(sizeof(Cliente));
@@ -183,35 +185,29 @@ void validarNomeCliente(char *nome) {
 }
 
 int validarCPF(char *cpf) {
-    int tam;
+
+    printf("\n Entrei na validarCPF\n");
     Cliente* clt;
 
     do {
 
-        do {
-
-            printf("CPF(somente números): ");
-            fgets(cpf, 30, stdin);
-
-            tam = strlen(cpf);
-            cpf[tam - 1] = '\0';
-            
-            clt = acharClt(cpf);
-
-            if (clt != NULL) {
-
-                return 1;
-
-            }
-
-
-        } while ((tam != 12) || !validarNumInteiro(cpf));
+        printf("CPF(somente números): ");
+        fgets(cpf, 30, stdin);
 
     } while (!verificarCpf(cpf));
 
+    clt = acharClt(cpf);
+
+    if (clt != NULL) {
+
+        free(clt);
+        return 1;
+
+    }
+
     printf(" ");
     printf("CPF válido!\n");
-
+    free(clt);
     return 0;
 
 }
@@ -288,6 +284,7 @@ void pesqClt(void) {
 
     }
 
+    free(clt);
 }
 
 void apgClt(void) {
@@ -320,50 +317,55 @@ void apgClt(void) {
         aux = (Cliente*) malloc(sizeof(Cliente));
         fp = fopen("arqCliente.dat", "r+b");
 
-        if (fp == NULL) {
-            printf("Não foi possível deletar!\n");
-            
-        }
+        if (access("arqCliente.dat", F_OK) != -1) {
 
-        else {
+            if (fp == NULL) {
+                printf("Não foi possível deletar!\n");
+                
+            }
 
-            while(!feof(fp)) {
+            else {
 
-                fread(aux, sizeof(Cliente), 1, fp);
+                while(fread(aux, sizeof(Cliente), 1, fp)) {
 
-                if ((strcmp(aux->cpf, cpf) == 0) && (aux->ativo != 0)) {
-                    
-                    exibCliente(aux);
+                    if ((strcmp(aux->cpf, cpf) == 0) && (aux->ativo != 0)) {
+                        
+                        exibCliente(aux);
 
-                    printf("\nDeseja realmente deletar?1 para sim, 0 para não.\n");
-                    fgets(aux2, 20, stdin);
-                    
-                    tam = strlen(aux2);
-                    aux2[tam - 1] = '\0';
+                        printf("\nDeseja realmente deletar?1 para sim, 0 para não.\n");
+                        fgets(aux2, 20, stdin);
+                        
+                        tam = strlen(aux2);
+                        aux2[tam - 1] = '\0';
 
-                    if (strcmp(aux2, "1\0") == 0) {
-                        aux->ativo = 0;
+                        if (strcmp(aux2, "1\0") == 0) {
+                            aux->ativo = 0;
 
-                        fseek(fp, -1*sizeof(Cliente), SEEK_CUR);
-                        fwrite(aux, sizeof(Cliente), 1, fp);
+                            fseek(fp, -1*sizeof(Cliente), SEEK_CUR);
+                            fwrite(aux, sizeof(Cliente), 1, fp);
 
-                        printf("\nCliente excluído com sucesso!\n");
-                        fclose(fp);
-                    }
+                            printf("\nCliente excluído com sucesso!\n");
+                        }
 
-                    else {
-                        printf("\nCancelado!\n");
-                        fclose(fp);
+                        else {
+                            printf("\nCancelado!\n");
+
+                        }
 
                     }
 
                 }
 
             }
-
+            free(aux);
         }
 
-        free(aux);
+        else {
+            printf("\nErro com arquivo\n");
+
+        }
     }
 
+    fclose(fp);
+    free(clt);
 }
