@@ -28,7 +28,7 @@ int main(void) {
         }
 
         else if (esc=='4') {
-            printf("Atualizar cliente\n");
+            atlClt();
 
         }
 
