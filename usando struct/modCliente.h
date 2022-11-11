@@ -22,3 +22,4 @@ Cliente* acharClt(char *cpf);
 void pesqClt(void);
 void apgClt(void);
 void atlClt(void);
+char telAtl(void);
