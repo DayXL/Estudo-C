@@ -378,8 +378,11 @@ void atlClt(void) {
     int tam;
     char aux2[20];
     int achou = 0;
+    char nomeCliente[100];
+    char numero[30];
+    char email[100];
 
-    printf("\n = Apagar Cliente = \n"); 
+    printf("\n = Atualizar Cliente = \n"); 
     printf("CPF(somente números): ");
     fgets(cpf, 30, stdin);
 
@@ -402,7 +405,7 @@ void atlClt(void) {
         if (access("arqCliente.dat", F_OK) != -1) {
 
             if (fp == NULL) {
-                printf("Não foi possível deletar!\n");
+                printf("Não foi possível atualizar!\n");
                 
             }
 
@@ -414,19 +417,28 @@ void atlClt(void) {
                         achou = 1;
                         exibCliente(aux);
 
-                        printf("\nDeseja realmente deletar?1 para sim, 0 para não.\n");
+                        printf("\nDeseja realmente atualizar?1 para sim, 0 para não.\n");
                         fgets(aux2, 20, stdin);
                         
                         tam = strlen(aux2);
                         aux2[tam - 1] = '\0';
 
                         if (strcmp(aux2, "1\0") == 0) {
-                            aux->ativo = 0;
+
+                            validarNomeCliente(nomeCliente);
+
+                            validarNumeroCelular(numero);
+
+                            validarEmail(email);
+
+                            strcpy(aux->nomeDoCliente,nomeCliente);
+                            strcpy(aux->numero,numero);
+                            strcpy(aux->email,email);   
 
                             fseek(fp, -1*sizeof(Cliente), SEEK_CUR);
                             fwrite(aux, sizeof(Cliente), 1, fp);
 
-                            printf("\nCliente excluído com sucesso!\n");
+                            printf("\nCliente atualizado com sucesso!\n");
                         }
 
                         else {
