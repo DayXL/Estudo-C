@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int poten(int num, int pot);
+long int poten(int num, int pot);
 
 int main(void) {
     int num;
@@ -22,7 +22,7 @@ int main(void) {
     printf("\n");
 }
 
-int poten(int num, int pot) {
+long int poten(int num, int pot) {
     long int soma = num;
 
     if (pot == 0) {
@@ -35,7 +35,7 @@ int poten(int num, int pot) {
 
     for (int i = 2; i <= pot; i++ ) {
         soma = soma * num;
-        
+
     }
 
     return soma;
