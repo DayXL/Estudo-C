@@ -66,6 +66,8 @@ int main(void) {
 
     } while (aux == 0);
 
+    a = 0;
+    
     do {
 
         printf("\nDigite a segunda data: (dd/mm/ano) ");
