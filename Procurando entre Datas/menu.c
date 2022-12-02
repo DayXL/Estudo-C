@@ -92,6 +92,8 @@ int main(void) {
 
     } while (aux == 0);
 
+    lerArqPedCltEntDat(vetDiaMesAno1, vetDiaMesAno2);
+
     free(dia);
     free(mes);
     free(ano);
@@ -327,18 +329,18 @@ void lerArqPedCltEntDat(long int *diaMesAno1, long int *diaMesAno2) {
             while (fread(pedClt, sizeof(PedidoCliente), 1, fp)) {
 
                 dia = dividPal(pedClt->pedido, 0, 1);
-                mes = dividPal(pedClt->pedido, 3, 4);
-                ano = dividPal(pedClt->pedido, 6, 7);
-
+                mes = dividPal(pedClt->pedido, 2, 3);
+                ano = dividPal(pedClt->pedido, 4, 5);
+            
                 vetDiaMesAnoPed[0] = charParaInt(dia);
                 vetDiaMesAnoPed[1] = charParaInt(mes);
-                vetDiaMesAnoPed[2] = charParaInt(ano);
+                vetDiaMesAnoPed[2] = charParaInt(ano);               
 
-                if ((vetDiaMesAnoPed[2] > diaMesAno1[2]) && (vetDiaMesAnoPed[2] < diaMesAno2[2])) {
+                if ((vetDiaMesAnoPed[2] >= diaMesAno1[2]) && (vetDiaMesAnoPed[2] <= diaMesAno2[2])) {
 
-                    if ((vetDiaMesAnoPed[1] > diaMesAno1[1]) && (vetDiaMesAnoPed[1] < diaMesAno2[1])) {
+                    if ((vetDiaMesAnoPed[1] >= diaMesAno1[1]) && (vetDiaMesAnoPed[1] <= diaMesAno2[1])) {
 
-                        if ((vetDiaMesAnoPed[0] > diaMesAno1[0]) && (vetDiaMesAnoPed[0] < diaMesAno2[0])) {
+                        if ((vetDiaMesAnoPed[0] >= diaMesAno1[0]) && (vetDiaMesAnoPed[0] <= diaMesAno2[0])) {
                             exibPedido(pedClt);
 
                         }
