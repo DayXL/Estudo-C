@@ -66,7 +66,7 @@ int main(void) {
 
     } while (aux == 0);
 
-    a = 0;
+    aux = 0;
     
     do {
 
