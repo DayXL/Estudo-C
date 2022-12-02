@@ -1,15 +1,21 @@
 #include <stdio.h>
-#include "cabecalhoData.h"
+#include <stdlib.h>
 
 int diaDoAno(int, int, int);
+int dataValida(int, int, int);
+int anoBissexto(int);
+int escolha(void);
 
 int main(void) {
     int dia;
     int mes;
     int ano;
     int a = 0;
+    int diaCalc;
 
     while (a == 0) {
+
+        system ( " clear||cls " );
 
         printf("Digite o dia: ");
         scanf("%d", &dia);
@@ -26,7 +32,10 @@ int main(void) {
         a = dataValida(dia, mes, ano);
 
         if (a == 1) {
-            diaDoAno(dia, mes, ano);
+            diaCalc = diaDoAno(dia, mes, ano);
+            printf("\n");
+            printf("%d", diaCalc);
+            printf("\n");
 
         }
 
@@ -77,3 +86,35 @@ int diaDoAno(int dia , int mes, int ano) {
 
 }
 
+int anoBissexto(int ano) {
+    int a;
+
+    //Caso ele siga a expressão nos parenteses retornara 1, caso não, irá retorna 0.
+    a = (((ano % 4 == 0) && (ano % 100 != 0)) || (ano % 400 == 0)) ? 1 : 0;
+
+    return a;
+
+}
+
+int dataValida(int dia, int mes, int ano) {
+    int maiorDiaMes[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    int maiorDia = 0;
+    int a;
+
+    if ((mes > 12) || (mes < 1)) {
+        return 0;
+
+    }
+
+    maiorDia = maiorDiaMes[mes - 1];
+
+    if ((mes == 2) && anoBissexto(ano)) {
+        maiorDia = maiorDia + 1;
+
+    }
+
+    a = ((dia > maiorDia) || (dia < 0)) ? 0 : 1;
+
+    return a;
+
+}
