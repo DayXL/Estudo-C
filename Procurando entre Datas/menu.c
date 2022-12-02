@@ -287,7 +287,7 @@ char* dividPal(char *pal, int del1, int del2) {
     int tam = del2 - del1;
     int aux = 0;
 
-    char* palavra = (char*) malloc(tam * sizeof(char));
+    char* palavra = (char*) malloc((tam + 1) * sizeof(char));
 
     palavra[0] = pal[del1];
 
@@ -299,6 +299,8 @@ char* dividPal(char *pal, int del1, int del2) {
 
     }
 
+    palavra[tam + 1] = '\0';
+    
     return palavra;
 
 }
