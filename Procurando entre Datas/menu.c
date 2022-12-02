@@ -17,30 +17,59 @@ struct pedidoCliente {
 
 void lerArqPedClt(void);
 void exibPedido(PedidoCliente *pedClt);
-int anoBissexto(int ano);
-int dataValida(int dia, int mes, int ano);
+int anoBissexto(long int ano);
+int dataValida(long int dia, long int mes, long int ano);
 long int charParaInt(char *num);
 long int poten(int num, int pot);
 int validarNumParData(char *numero);
+char* dividPal(char *pal, int del1, int del2);
 
 int main(void) {
     char data[30];
+    int aux = 0;
     int tam;
+    char* dia;
+    char* mes;
+    char* ano;
+    long int diaLd;
+    long int mesLd;
+    long int anoLd;
 
     //printf("Todos os pedidos disponiveis: ");
 
     //lerArqPedClt();
 
     do {
+
         printf("\nDigite a primeira data: (dd/mm/ano) ");
         fgets(data, 30, stdin);
 
         tam = strlen(data);
         data[tam - 1] = '\0';
 
-    } while (!validarNumParData(data));    
+        if (validarNumParData(data) == 1) {
+            dia = dividPal(data, 0, 1);
+            mes = dividPal(data, 3, 4);
+            ano = dividPal(data, 6, 9);
 
-    printf("a");
+            diaLd = charParaInt(dia);
+            mesLd = charParaInt(mes);
+            anoLd = charParaInt(ano);
+
+            if (dataValida(diaLd, mesLd, anoLd) == 1) {
+                printf("aqui");
+
+                aux = 1;
+            
+            }
+        }
+
+    } while (aux == 0);
+
+    free(dia);
+    free(mes);
+    free(ano);
+
     return 0;
 
 }
@@ -104,7 +133,7 @@ void exibPedido(PedidoCliente *pedClt) {
 
 }
 
-int anoBissexto(int ano) {
+int anoBissexto(long int ano) {
     int a;
 
     //Caso ele siga a expressão nos parenteses retornara 1, caso não, irá retorna 0.
@@ -114,7 +143,7 @@ int anoBissexto(int ano) {
 
 }
 
-int dataValida(int dia, int mes, int ano) {
+int dataValida(long int dia, long int mes, long int ano) {
     int maiorDiaMes[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     int maiorDia = 0;
     int a;
@@ -223,5 +252,25 @@ int validarNumParData(char *numero) {
     }
 
     return 1;
+
+}
+
+char* dividPal(char *pal, int del1, int del2) {
+    int tam = del2 - del1;
+    int aux = 0;
+
+    char* palavra = (char*) malloc(tam * sizeof(char));
+
+    palavra[0] = pal[del1];
+
+    for (int i = del1; i <= del2; i++) {
+        
+        palavra[aux] = pal[i];
+
+        aux = aux + 1;
+
+    }
+
+    return palavra;
 
 }
