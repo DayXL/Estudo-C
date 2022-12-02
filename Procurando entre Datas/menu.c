@@ -23,7 +23,7 @@ long int charParaInt(char *num);
 long int poten(int num, int pot);
 int validarNumParData(char *numero);
 char* dividPal(char *pal, int del1, int del2);
-void lerArqPedCltEntDat(long int diaMesAno1, long int diaMesAno2);
+void lerArqPedCltEntDat(long int *diaMesAno1, long int *diaMesAno2);
 
 int main(void) {
     char data1[30];
@@ -301,25 +301,15 @@ char* dividPal(char *pal, int del1, int del2) {
 
 }
 
-void lerArqPedCltEntDat(long int diaMesAno1, long int diaMesAno2) {
+void lerArqPedCltEntDat(long int *diaMesAno1, long int *diaMesAno2) {
     
     FILE *fp;
     PedidoCliente *pedClt;
 
-   //char* dia;
-    //char* mes;
-    //char* ano;
-    //long int diaLd;
-    //long int mesLd;
-    //long int anoLd;
-
-    //dia = dividPal(data1, 0, 1);
-    //mes = dividPal(data1, 3, 4);
-    //ano = dividPal(data1, 6, 9);
-
-    //diaLd = charParaInt(dia);
-    //mesLd = charParaInt(mes);
-    //anoLd = charParaInt(ano);
+    char* dia;
+    char* mes;
+    char* ano;
+    long int vetDiaMesAnoPed[3];
     
     if (access("arqPedClt.dat", F_OK) != -1) {
 
@@ -336,8 +326,24 @@ void lerArqPedCltEntDat(long int diaMesAno1, long int diaMesAno2) {
 
             while (fread(pedClt, sizeof(PedidoCliente), 1, fp)) {
 
-                if (pedClt->pedido) {
-                    exibPedido(pedClt);
+                dia = dividPal(pedClt->pedido, 0, 1);
+                mes = dividPal(pedClt->pedido, 3, 4);
+                ano = dividPal(pedClt->pedido, 6, 9);
+
+                vetDiaMesAnoPed[0] = charParaInt(dia);
+                vetDiaMesAnoPed[1] = charParaInt(mes);
+                vetDiaMesAnoPed[2] = charParaInt(ano);
+
+                if ((vetDiaMesAnoPed[2] > diaMesAno1[2]) && (vetDiaMesAnoPed[2] < diaMesAno2[2])) {
+
+                    if ((vetDiaMesAnoPed[1] > diaMesAno1[1]) && (vetDiaMesAnoPed[1] < diaMesAno2[1])) {
+
+                        if ((vetDiaMesAnoPed[0] > diaMesAno1[0]) && (vetDiaMesAnoPed[0] < diaMesAno2[0])) {
+                            exibPedido(pedClt);
+
+                        }
+
+                    }
 
                 }
 
@@ -350,5 +356,9 @@ void lerArqPedCltEntDat(long int diaMesAno1, long int diaMesAno2) {
 
         fclose(fp);
     }
+
+    free(dia);
+    free(mes);
+    free(ano);
 
 }
