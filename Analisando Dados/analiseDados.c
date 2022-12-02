@@ -43,14 +43,22 @@ void lerArq(void) {
     }
 
     else {
-        
+
         //De Flavius
 
         letra = fgetc(fp);
+        
+        char letraAnt;
+        int i = 0;
 
         while (letra != EOF) {
 
-            if (letra == ',') {
+            if (letra == '"') {
+                i = i + 1;
+
+            }
+
+            else if ((letra == ',') && (i % 2 == 0)) {
                 printf("\n");
 
             }
