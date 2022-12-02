@@ -23,17 +23,18 @@ long int charParaInt(char *num);
 long int poten(int num, int pot);
 int validarNumParData(char *numero);
 char* dividPal(char *pal, int del1, int del2);
+void lerArqPedCltEntDat(long int diaMesAno1, long int diaMesAno2);
 
 int main(void) {
     char data1[30];
+    char data2[30];
     int aux = 0;
     int tam;
     char* dia;
     char* mes;
     char* ano;
-    long int diaLd;
-    long int mesLd;
-    long int anoLd;
+    long int vetDiaMesAno1[3];
+    long int vetDiaMesAno2[3];
 
     //printf("Todos os pedidos disponiveis: ");
 
@@ -42,21 +43,21 @@ int main(void) {
     do {
 
         printf("\nDigite a primeira data: (dd/mm/ano) ");
-        fgets(data, 30, stdin);
+        fgets(data1, 30, stdin);
 
-        tam = strlen(data);
-        data[tam - 1] = '\0';
+        tam = strlen(data1);
+        data1[tam - 1] = '\0';
 
-        if (validarNumParData(data) == 1) {
-            dia = dividPal(data, 0, 1);
-            mes = dividPal(data, 3, 4);
-            ano = dividPal(data, 6, 9);
+        if (validarNumParData(data1) == 1) {
+            dia = dividPal(data1, 0, 1);
+            mes = dividPal(data1, 3, 4);
+            ano = dividPal(data1, 6, 9);
 
-            diaLd = charParaInt(dia);
-            mesLd = charParaInt(mes);
-            anoLd = charParaInt(ano);
+            vetDiaMesAno1[0] = charParaInt(dia);
+            vetDiaMesAno1[1] = charParaInt(mes);
+            vetDiaMesAno1[2] = charParaInt(ano);
 
-            if (dataValida(diaLd, mesLd, anoLd) == 1) {
+            if (dataValida(vetDiaMesAno1[0], vetDiaMesAno1[1], vetDiaMesAno1[2]) == 1) {
 
                 aux = 1;
             
@@ -68,21 +69,21 @@ int main(void) {
     do {
 
         printf("\nDigite a segunda data: (dd/mm/ano) ");
-        fgets(data, 30, stdin);
+        fgets(data2, 30, stdin);
 
-        tam = strlen(data);
-        data[tam - 1] = '\0';
+        tam = strlen(data2);
+        data2[tam - 1] = '\0';
 
-        if (validarNumParData(data) == 1) {
-            dia = dividPal(data, 0, 1);
-            mes = dividPal(data, 3, 4);
-            ano = dividPal(data, 6, 9);
+        if (validarNumParData(data2) == 1) {
+            dia = dividPal(data2, 0, 1);
+            mes = dividPal(data2, 3, 4);
+            ano = dividPal(data2, 6, 9);
 
-            diaLd = charParaInt(dia);
-            mesLd = charParaInt(mes);
-            anoLd = charParaInt(ano);
+            vetDiaMesAno2[0] = charParaInt(dia);
+            vetDiaMesAno2[1] = charParaInt(mes);
+            vetDiaMesAno2[2] = charParaInt(ano);
 
-            if (dataValida(diaLd, mesLd, anoLd) == 1) {
+            if (dataValida(vetDiaMesAno2[0], vetDiaMesAno2[1], vetDiaMesAno2[2]) == 1) {
 
                 aux = 1;
             
@@ -297,5 +298,57 @@ char* dividPal(char *pal, int del1, int del2) {
     }
 
     return palavra;
+
+}
+
+void lerArqPedCltEntDat(long int diaMesAno1, long int diaMesAno2) {
+    
+    FILE *fp;
+    PedidoCliente *pedClt;
+
+   //char* dia;
+    //char* mes;
+    //char* ano;
+    //long int diaLd;
+    //long int mesLd;
+    //long int anoLd;
+
+    //dia = dividPal(data1, 0, 1);
+    //mes = dividPal(data1, 3, 4);
+    //ano = dividPal(data1, 6, 9);
+
+    //diaLd = charParaInt(dia);
+    //mesLd = charParaInt(mes);
+    //anoLd = charParaInt(ano);
+    
+    if (access("arqPedClt.dat", F_OK) != -1) {
+
+        fp = fopen("arqPedClt.dat","rb");
+
+        if (fp == NULL) {
+            printf("Erro com arquivo!");
+
+        }
+
+        else {
+
+            pedClt = (PedidoCliente*) malloc(sizeof(PedidoCliente));
+
+            while (fread(pedClt, sizeof(PedidoCliente), 1, fp)) {
+
+                if (pedClt->pedido) {
+                    exibPedido(pedClt);
+
+                }
+
+
+            }
+
+            free(pedClt);
+
+        }
+
+        fclose(fp);
+    }
 
 }
