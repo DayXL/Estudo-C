@@ -42,7 +42,7 @@ int main(void) {
 
     do {
 
-        printf("\nDigite a primeira data: (dd/mm/ano) ");
+        printf("\nDigite a primeira data: (dd/mm/aa) ");
         fgets(data1, 30, stdin);
 
         tam = strlen(data1);
@@ -51,7 +51,7 @@ int main(void) {
         if (validarNumParData(data1) == 1) {
             dia = dividPal(data1, 0, 1);
             mes = dividPal(data1, 3, 4);
-            ano = dividPal(data1, 6, 9);
+            ano = dividPal(data1, 6, 7);
 
             vetDiaMesAno1[0] = charParaInt(dia);
             vetDiaMesAno1[1] = charParaInt(mes);
@@ -77,7 +77,7 @@ int main(void) {
         if (validarNumParData(data2) == 1) {
             dia = dividPal(data2, 0, 1);
             mes = dividPal(data2, 3, 4);
-            ano = dividPal(data2, 6, 9);
+            ano = dividPal(data2, 6, 7);
 
             vetDiaMesAno2[0] = charParaInt(dia);
             vetDiaMesAno2[1] = charParaInt(mes);
@@ -239,7 +239,7 @@ int validarNumParData(char *numero) {
     int tam = strlen(numero);
     int aux = 0;
 
-    if (tam != 10) {
+    if (tam != 8) {
         return 0;
 
     }
@@ -328,7 +328,7 @@ void lerArqPedCltEntDat(long int *diaMesAno1, long int *diaMesAno2) {
 
                 dia = dividPal(pedClt->pedido, 0, 1);
                 mes = dividPal(pedClt->pedido, 3, 4);
-                ano = dividPal(pedClt->pedido, 6, 9);
+                ano = dividPal(pedClt->pedido, 6, 7);
 
                 vetDiaMesAnoPed[0] = charParaInt(dia);
                 vetDiaMesAnoPed[1] = charParaInt(mes);
