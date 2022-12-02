@@ -75,7 +75,7 @@ int verificarCpf(char *cpf) {
         soma = 0;
 
         for (int i = 0; i < 10; i++) {
-                soma = soma + ((cpf[i] - '0' ) * (i));
+            soma = soma + ((cpf[i] - '0' ) * (i));
 
         }
 
