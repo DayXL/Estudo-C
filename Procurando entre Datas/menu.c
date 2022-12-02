@@ -25,7 +25,7 @@ int validarNumParData(char *numero);
 char* dividPal(char *pal, int del1, int del2);
 
 int main(void) {
-    char data[30];
+    char data1[30];
     int aux = 0;
     int tam;
     char* dia;
@@ -57,7 +57,32 @@ int main(void) {
             anoLd = charParaInt(ano);
 
             if (dataValida(diaLd, mesLd, anoLd) == 1) {
-                printf("aqui");
+
+                aux = 1;
+            
+            }
+        }
+
+    } while (aux == 0);
+
+    do {
+
+        printf("\nDigite a segunda data: (dd/mm/ano) ");
+        fgets(data, 30, stdin);
+
+        tam = strlen(data);
+        data[tam - 1] = '\0';
+
+        if (validarNumParData(data) == 1) {
+            dia = dividPal(data, 0, 1);
+            mes = dividPal(data, 3, 4);
+            ano = dividPal(data, 6, 9);
+
+            diaLd = charParaInt(dia);
+            mesLd = charParaInt(mes);
+            anoLd = charParaInt(ano);
+
+            if (dataValida(diaLd, mesLd, anoLd) == 1) {
 
                 aux = 1;
             
