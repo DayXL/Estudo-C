@@ -55,7 +55,7 @@ int diaDoAno(int dia , int mes, int ano) {
     int diaDoAno = 0;
     int diasDoMes[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-    for (int i = 0; i < mes; i++) {
+    for (int i = 0; i < mes - 1; i++) {
 
         if (mes == 1) {
         return dia;
@@ -63,7 +63,7 @@ int diaDoAno(int dia , int mes, int ano) {
         }
     
         else if (mes == 2) {
-        return dia + 31;
+        diaDoAno = dia + 31;
 
         }
 
@@ -77,7 +77,7 @@ int diaDoAno(int dia , int mes, int ano) {
 
     diaDoAno = diaDoAno + dia;
 
-    if ((mes == 2) && anoBissexto(ano)) {
+    if ((mes >= 2) && anoBissexto(ano)) {
         diaDoAno = diaDoAno + 1;
 
     }
